@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="OnsenUI-dist-2.9.2/css/onsenui.css">
+    <link rel="stylesheet" href="OnsenUI-dist-2.9.2/css/onsen-css-components.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Flussseite</title>
+</head>
+
+<body>
+    <div class="app">
+        <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+        <template id="page1.html">
+            <ons-page id="page1">      
+                <ons-toolbar>
+                    <div class="center">
+                        Flussseite, du Opfer.
+                    </div>
+                </ons-toolbar>     
+
+                <ons-card id="status-card">
+                    <div class="title">Status</div>
+                    <div class="content"></div>
+                </ons-card>
+            
+                <ons-bottom-toolbar>
+                    <ons-list>
+                        <ons-list-item id="settings-button" tappable>
+                            Settings
+                        </ons-list-item>
+                    </ons-list>
+                    <ons-list-header>Numbers</ons-list-header>
+                </ons-bottom-toolbar>
+
+            </ons-page>
+        </template>
+        
+        <template id="page2.html">
+            <ons-page id="page2">
+                <ons-toolbar>
+                    <div class="left"><ons-back-button>Back</ons-back-button></div>
+                    <div class="center"></div>
+                </ons-toolbar>
+                <ons-list>
+                    <ons-list-header>Text input</ons-list-header>
+                    <ons-list-item class="input-items">
+                        <div class="left">
+                            <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                        </div>
+                        <label class="center">
+                            <ons-input id="name-input" float maxlength="20" placeholder="Name"></ons-input>
+                        </label>
+                    </ons-list-item>
+
+                    <ons-list-header>Switches</ons-list-header>
+                    <ons-list-item>
+                        <label class="center" for="switch1">
+                            Switch<span id="switch-status">&nbsp;(on)</span>
+                        </label>
+                        <div class="right">
+                            <ons-switch id="model-switch" input-id="switch1" checked="true"></ons-switch>
+                        </div>
+                    </ons-list-item>
+                </ons-list>
+            </ons-page>
+        </template>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="OnsenUI-dist-2.9.2/js/onsenui.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+
+</html>
