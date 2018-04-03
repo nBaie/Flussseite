@@ -3,3 +3,7 @@ platforms
 ._*
 .Spotlight-V100
 .Trashes
+
+node_modules
+typings
+.vscode
