@@ -24,12 +24,12 @@ var gps = (function(){
 
     /* The following functions take their parameter in something close to meters, along the equator, and return their result in degrees */
 
-    function y2lat_m(y)   { return (2 * Math.atan(Math.exp( y/EARTH_RADIUS)) - M_PI/2) * RAD2DEG; };
+    function y2lat_m(y)   { return (2 * Math.atan(Math.exp( y/EARTH_RADIUS)) - Math.PI/2) * RAD2DEG; };
     function x2lon_m(x)   { return (x/EARTH_RADIUS) * RAD2DEG; };
 
     /* The following functions take their parameter in degrees, and return their result in something close to meters, along the equator */
 
-    function lat2y_m(lat) { return Math.log(Math.tan( (DEG2RAD * lat) / 2 + M_PI/4 )) * EARTH_RADIUS; };
+    function lat2y_m(lat) { return Math.log(Math.tan( (DEG2RAD * lat) / 2 + Math.PI/4 )) * EARTH_RADIUS; };
     function lon2x_m(lon) { return DEG2RAD * lon * EARTH_RADIUS; };
 
     return {
