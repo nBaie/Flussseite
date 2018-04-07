@@ -4,15 +4,25 @@
 
 var gps = (function(){
 
+//===================================================================
+// PRIVATE
+//===================================================================
+
+
     var RAD2DEG = 180 / Math.PI;
     var DEG2RAD = Math.PI / 180;
     var PI_4 = Math.PI / 4;
     var EARTH_RADIUS = 6378137
 
-    /* =================================================================== 
+
+//===================================================================
+// PUBLIC
+//===================================================================
+
+    /* 
      * Conversion Functions (Lat/Lon) <=> (Mercator) from 
      * https://wiki.openstreetmap.org/wiki/Mercator
-     * =================================================================== */
+     */
 
     /* The following functions take their parameter and return their result in degrees */
 
@@ -31,6 +41,10 @@ var gps = (function(){
 
     function lat2y_m(lat) { return Math.log(Math.tan( (DEG2RAD * lat) / 2 + Math.PI/4 )) * EARTH_RADIUS; };
     function lon2x_m(lon) { return DEG2RAD * lon * EARTH_RADIUS; };
+
+
+//===================================================================
+
 
     return {
         y2lat_d: y2lat_d,
