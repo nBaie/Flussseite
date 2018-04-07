@@ -30,7 +30,7 @@ var overpass = (function(){
     }
 
 
-//===================================================================
+    //===================================================================
 
 
     function setDetailed(value)
@@ -53,7 +53,27 @@ var overpass = (function(){
     var dataValid = false;
 
 
-//===================================================================
+    //===================================================================
+
+    /**
+     * Creates a new window around the current position to get new data.
+     * 
+     * @param {*} latitude 
+     * @param {*} longitude 
+     */
+    function createNewWindow(latitude, longitude)
+    {
+        var x = gps.lon2x_m(longitude);
+        var y = gps.lat2y_m(latitude);
+
+        currentWindow = [   gps.y2lat_m( y - WINDOW_SIZE / 2 ),
+                            gps.x2lon_m( x - WINDOW_SIZE / 2 ),
+                            gps.y2lat_m( y + WINDOW_SIZE / 2 ),
+                            gps.x2lon_m( x + WINDOW_SIZE / 2 ) ];
+    }
+
+
+    //===================================================================
 
 
     /**
@@ -85,7 +105,7 @@ var overpass = (function(){
     }
 
 
-//===================================================================
+    //===================================================================
 
 
     return {
