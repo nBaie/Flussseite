@@ -37,7 +37,14 @@ var overpass = (function(){
 
     function setDetailed(value)
     {
+        if(typeof value !== "boolean")
+            return;
 
+        if(detailed != value)
+        {
+            detailed = value;
+            getNewData();
+        }
     }
 
 
@@ -50,6 +57,7 @@ var overpass = (function(){
     var WINDOW_SIZE = 2000;         // Size of the sides of the square around the current position in meters.
     var QUERY_PERCENTAGE = 0.1;     // If the GPS-Position is in the outer QUERY_PERCENTAGE-part of the square Area, new data is obtained
     
+    var detailed = false;
     var currentWindow;              // Array: Low lat, low lon, high lat, high lon
     var data;
     var dataValid = false;
