@@ -27,7 +27,7 @@ var overpass = (function(){
         {
             writeDebug("New data is needed.");
             createNewWindow(latitude, longitude);
-            getNewData()
+            getNewData();
         }
     }
 
@@ -69,6 +69,54 @@ var overpass = (function(){
     {
         $('#overpass-card .content').html(str);
     }
+
+    /**
+     * Get new data from the overpass api using the current Window.
+     */
+    function getNewData()
+    {
+        writeDebug("Fetching new data.");
+        // Construct the query
+        var bbox = "(" + currentWindow[0] + "," + currentWindow[1] + "," +currentWindow[2] + "," + currentWindow[3] + ")";
+        var before = "[out:json][timeout:25];(";
+        var after = "); out body; >; out skel qt;";
+        var defaultQ = `
+            node["waterway"="canal"]${bbox};
+            way["waterway"="canal"]${bbox};
+            relation["waterway"="canal"]${bbox};
+            node["waterway"="river"]${bbox};
+            way["waterway"="river"]${bbox};
+            relation["waterway"="river"]${bbox};
+            node["waterway"="riverbank"]${bbox};
+            way["waterway"="riverbank"]${bbox};
+            relation["waterway"="riverbank"]${bbox};
+            node["natural"="water"]${bbox};
+            way["natural"="water"]${bbox};
+            relation["natural"="water"]${bbox};`;
+        var detailedQ = `
+            node["waterway"="stream"]${bbox};
+            way["waterway"="stream"]${bbox};
+            relation["waterway"="stream"]${bbox};`;
+
+        var query = before + defaultQ;
+        if(detailed) query += detailedQ;
+        query += after;
+
+        //Send the query
+        //TODO: Server-handling
+        var jqxhr = $.post(SERVERS[0], query, function( data ) {
+            writeDebug(JSON.stringify(data).substring(0, 200) + "...");
+        }, "json")
+        .fail(function() {
+            writeDebug("Error");
+        });
+
+        //TODO: Return the data in some way
+    }
+
+
+    //===================================================================
+
     /**
      * Creates a new window around the current position to get new data.
      * 
