@@ -46,7 +46,7 @@ var overpass = (function(){
 //===================================================================
 
     // Servers from https://wiki.openstreetmap.org/wiki/Overpass_API
-    var SERVERS = ["https://overpass.kumi.systems/api/interpreter", "https://overpass-api.de/", "http://overpass.osm.rambler.ru/cgi/interpreter"];  
+    var SERVERS = ["https://overpass.kumi.systems/api/interpreter", "https://overpass-api.de/api/interpreter", "http://overpass.osm.rambler.ru/cgi/interpreter"];  
     var WINDOW_SIZE = 2000;         // Size of the sides of the square around the current position in meters.
     var QUERY_PERCENTAGE = 0.1;     // If the GPS-Position is in the outer QUERY_PERCENTAGE-part of the square Area, new data is obtained
     
