@@ -111,10 +111,12 @@ async function locationUpdater()
             {
                 // write("Type of GPS-Position: " + typeof gpsPosition);
                 outputPosition(gpsPosition);
+                overpass.getRivers(gpsPosition.coords.latitude, gpsPosition.coords.longitude);  //Only for testing purposes
             }
             else
             {
                 write("An Error occured.");
+                overpass.getRivers(52.11, 9.9);  //Only for testing purposes
             }
         });
 
