@@ -4,6 +4,46 @@
 
 var overpass = (function(){
 
+//===================================================================
+// PUBLIC
+//===================================================================
+
+
+    /**
+     * This is the main-function for the overpass module. This
+     * function will be called from outside to obtain information
+     * about rivers near to the user position.
+     * 
+     * @param {*} latitude 
+     * @param {*} longitude 
+     */
+    function getRivers(latitude, longitude)
+    {
+        // Create a new map-window if we didn't get
+        // data yet or if we're outside or at the
+        // edge of the window.
+        if(checkNewData(latitude, longitude))
+        {
+            createNewWindow(latitude, longitude);
+            getNewData()
+        }
+    }
+
+
+//===================================================================
+
+
+    function setDetailed(value)
+    {
+
+    }
+
+
+//===================================================================
+// PRIVATE
+//===================================================================
+
+
     var SERVERS = [];
     var WINDOW_SIZE = 2000;         // Size of the sides of the square around the current position in meters.
     var QUERY_PERCENTAGE = 0.1;     // If the GPS-Position is in the outer QUERY_PERCENTAGE-part of the square Area, new data is obtained
@@ -11,6 +51,10 @@ var overpass = (function(){
     var currentWindow;              // Array: Low lat, low lon, high lat, high lon
     var data;
     var dataValid = false;
+
+
+//===================================================================
+
 
     /**
      * Checks if new data has to be obtained.
@@ -40,34 +84,13 @@ var overpass = (function(){
         return false;        
     }
 
-    /**
-     * This is the main-function for the overpass module. This
-     * function will be called from outside to obtain information
-     * about rivers near to the user position.
-     * 
-     * @param {*} latitude 
-     * @param {*} longitude 
-     */
-    function getRivers(latitude, longitude)
-    {
-        // Create a new map-window if we didn't get
-        // data yet or if we're outside or at the
-        // edge of the window.
-        if(checkNewData(latitude, longitude))
-        {
-            createNewWindow(latitude, longitude);
-            getNewData()
-        }
-    }
 
-    function setDetailed(value)
-    {
+//===================================================================
 
-    }
 
     return {
         getRivers: getRivers,
         setDetailed: setDetailed
     };
 
-})();
+})(); // end of overpass module / class
