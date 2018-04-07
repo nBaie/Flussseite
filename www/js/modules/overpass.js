@@ -19,11 +19,13 @@ var overpass = (function(){
      */
     function getRivers(latitude, longitude)
     {
+        writeDebug("Going to get rivers.");
         // Create a new map-window if we didn't get
         // data yet or if we're outside or at the
         // edge of the window.
         if(checkNewData(latitude, longitude))
         {
+            writeDebug("New data is needed.");
             createNewWindow(latitude, longitude);
             getNewData()
         }
@@ -55,6 +57,10 @@ var overpass = (function(){
 
     //===================================================================
 
+    function writeDebug(str)
+    {
+        $('#overpass-card .content').html(str);
+    }
     /**
      * Creates a new window around the current position to get new data.
      * 
@@ -63,6 +69,7 @@ var overpass = (function(){
      */
     function createNewWindow(latitude, longitude)
     {
+        writeDebug("Creating a new window.");
         var x = gps.lon2x_m(longitude);
         var y = gps.lat2y_m(latitude);
 
@@ -84,6 +91,8 @@ var overpass = (function(){
      */
     function checkNewData(latitude, longitude)
     {
+        writeDebug("Checking if new data is needed.");
+
         if(!dataValid) return true;
         if(typeof currentWindow === "undefined") return true;
 
